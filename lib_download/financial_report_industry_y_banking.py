@@ -60,10 +60,10 @@ def get_financial_report_industry_y_banking():
     d_url_y_bs_banking = {"y_bs_banking":l_url_y_bs_banking}
     d_url_y_ic_banking = {"y_ic_banking":l_url_y_ic_banking}
     d_url_y_ratio_banking = {"y_ratio_banking": l_url_y_ratio_banking}
-
+    
     # function: get json
     def get_json(url, headers):
-        req = requests.get(url, headers).json()
+        req = requests.get(url, headers=headers).json()
         time.sleep(2)
         return req
 
@@ -76,7 +76,7 @@ def get_financial_report_industry_y_banking():
             futures = []
             for url in l_url:
                 try:        
-                    future = executor.submit(get_json, (url)(headers))
+                    future = executor.submit(get_json, url, headers)
                     futures.append(future)
                 except:
                     pass

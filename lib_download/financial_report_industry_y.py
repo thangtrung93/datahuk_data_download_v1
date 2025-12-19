@@ -63,7 +63,7 @@ def get_financial_report_industry_y():
 
     # function: get json
     def get_json(url, headers):
-        req = requests.get(url, headers).json()
+        req = requests.get(url, headers=headers).json()
         time.sleep(2)
         return req
 
@@ -76,7 +76,7 @@ def get_financial_report_industry_y():
             futures = []
             for url in l_url:
                 try:        
-                    future = executor.submit(get_json, (url)(headers))
+                    future = executor.submit(get_json, url, headers)
                     futures.append(future)
                 except:
                     pass
