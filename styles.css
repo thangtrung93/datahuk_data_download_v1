@@ -1,0 +1,23 @@
+
+
+/* Sidebar: Reduce padding */
+div[data-testid="stSidebarHeader"]{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/* Main */
+/*Header: reduce height */
+header[data-testid="stHeader"]{
+    height: 0px;
+}
+
+/* Header: reduce padding */
+div[data-testid="stAppViewBlockContainer"]{padding-top: 50px;}
+
+/* Logo: justify to center */
+div[data-testid="stFullScreenFrame"] div{justify-content: center;}
+
+/* Font text: Monospace */
+div[data-testid="stMarkdownContainer"] p{font-family: monospace;}
+div[data-testid="stText"] div{font-family: monospace;}
