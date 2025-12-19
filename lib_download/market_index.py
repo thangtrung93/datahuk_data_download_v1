@@ -15,6 +15,7 @@ d_industry_code = {"5300":"Bán lẻ", "8500":"Bảo hiểm", "8600":"Bất đ�
                    "6500":"Viễn thông", "2300":"Xây dựng và Vật liệu", "4500":"Y tế"}
 
 api_base_tcbs = st.secrets["api"]["api_base_tcbs"]
+auth_tcbs = st.secrets["headers"]["auth_tcbs"]
 
 def get_market_index():
     def get_url(index_type, d_industry_code):
@@ -33,13 +34,13 @@ def get_market_index():
     d_url_flow_supply_demand = {"flow_supply_demand":l_url_flow_supply_demand} 
 
     # function: get json
-    def get_json(url):
-        req = requests.get(url).json()
+    def get_json(url, headers):
+        req = requests.get(url, headers=headers).json()
         time.sleep(2)
         return req
 
     # enable excecutor
-    def get_json_all(d_url):
+    def get_json_all(d_url, headers):
         executor = ThreadPoolExecutor(100)
 
         d_json = {key: [] for key in list(d_url.keys())}
@@ -47,18 +48,19 @@ def get_market_index():
             futures = []
             for url in l_url:
                 try:        
-                    future = executor.submit(get_json, (url))
+                    future = executor.submit(get_json, url, headers)
                     futures.append(future)
                 except:
                     pass
             d_json[key_x] = futures
         return d_json
 
-    d_json_flow_breadth = get_json_all(d_url_flow_breadth)
-    d_json_flow_market_foreign_value = get_json_all(d_url_flow_market_foreign_value)
-    d_json_flow_market_value_percent_trading = get_json_all(d_url_flow_market_value_percent_trading)
-    d_json_flow_industry_index = get_json_all(d_url_flow_industry_index)
-    d_json_flow_supply_demand = get_json_all(d_url_flow_supply_demand)
+    headers_tcbs = {"Authorization":auth_tcbs}
+    d_json_flow_breadth = get_json_all(d_url_flow_breadth, headers_tcbs)
+    d_json_flow_market_foreign_value = get_json_all(d_url_flow_market_foreign_value, headers_tcbs)
+    d_json_flow_market_value_percent_trading = get_json_all(d_url_flow_market_value_percent_trading, headers_tcbs)
+    d_json_flow_industry_index = get_json_all(d_url_flow_industry_index, headers_tcbs)
+    d_json_flow_supply_demand = get_json_all(d_url_flow_supply_demand, headers_tcbs)
     # st.write(d_json_flow_market_value_percent_trading["flow_market_value_percent_trading"][0].result())
 
 
