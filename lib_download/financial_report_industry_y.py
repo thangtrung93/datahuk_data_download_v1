@@ -18,6 +18,7 @@ d_industry_code = {"5300":"Bán lẻ", "8500":"Bảo hiểm", "8600":"Bất đ�
 d_industry_code_banking = {"8300": "Ngân hàng"}
 
 api_base_tcbs = st.secrets["api"]["api_base_tcbs"]
+auth_tcbs = st.secrets["headers"]["auth_tcbs"]
 
 def get_financial_report_industry_y():
 
@@ -61,13 +62,13 @@ def get_financial_report_industry_y():
     # d_url_y_ratio_banking = {"y_ratio_banking": l_url_y_ratio_banking}
 
     # function: get json
-    def get_json(url):
-        req = requests.get(url).json()
+    def get_json(url, headers):
+        req = requests.get(url, headers).json()
         time.sleep(2)
         return req
 
     # enable excecutor
-    def get_json_all(d_url):
+    def get_json_all(d_url, headers):
         executor = ThreadPoolExecutor(100)
 
         d_json = {key: [] for key in list(d_url.keys())}
@@ -75,7 +76,7 @@ def get_financial_report_industry_y():
             futures = []
             for url in l_url:
                 try:        
-                    future = executor.submit(get_json, (url))
+                    future = executor.submit(get_json, (url)(headers))
                     futures.append(future)
                 except:
                     pass
@@ -87,11 +88,11 @@ def get_financial_report_industry_y():
     # d_json_q_ic = get_json_all(d_url_q_ic)
     # d_json_q_cf = get_json_all(d_url_q_cf)
     # d_json_q_ratio = get_json_all(d_url_q_ratio)
-
-    d_json_y_bs = get_json_all(d_url_y_bs)
-    d_json_y_ic = get_json_all(d_url_y_ic)
-    d_json_y_cf = get_json_all(d_url_y_cf)
-    d_json_y_ratio = get_json_all(d_url_y_ratio)    
+    headers_tcbs = {"Authorization":auth_tcbs}
+    d_json_y_bs = get_json_all(d_url_y_bs, headers_tcbs)
+    d_json_y_ic = get_json_all(d_url_y_ic, headers_tcbs)
+    d_json_y_cf = get_json_all(d_url_y_cf, headers_tcbs)
+    d_json_y_ratio = get_json_all(d_url_y_ratio, headers_tcbs)    
 
     # d_json_q_bs_banking = get_json_all(d_url_q_bs_banking)
     # d_json_q_ic_banking = get_json_all(d_url_q_ic_banking)

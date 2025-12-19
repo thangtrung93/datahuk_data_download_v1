@@ -18,6 +18,7 @@ api_industry = st.secrets["api"]["api_industry"]
 api_base_mas = st.secrets["api"]["api_base_mas"]
 api_base_tcbs = st.secrets["api"]["api_base_tcbs"]
 api_base_vci = st.secrets["api"]["api_base_vci"]
+auth_tcbs = st.secrets["headers"]["auth_tcbs"]
 
 # function: get json
 def get_json(url, headers):
@@ -131,7 +132,7 @@ def get_financial_ratio(ticker):
     headers_tcbs = {
         "Accept": "application/json",
         "Accept-Language": "vi",
-        "Authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoZW5fc2VydmljZSIsImV4cCI6MTc2NjE1NzcwNiwianRpIjoiIiwiaWF0IjoxNzY2MTE0NTA2LCJzdWIiOiIxMDAwMDY3MTk4OCIsImN1c3RvZHlJRCI6IjEwNUM1MTI4MTQiLCJ0Y2JzSWQiOiIxMDAwMDY3MTk4OCIsImVtYWlsIjoidGhhbmd0cnVuZzkzQGdtYWlsLmNvbSIsInJvbGVzIjpbImN1c3RvbWVyIl0sInNjb3BlcyI6WyJhbGw6YWxsIiwic29ja2V0OmFsbCJdLCJzdGVwdXBfZXhwIjowLCJzb3RwX3NpZ24iOiIiLCJjbGllbnRfa2V5IjoiMTAwMDA2NzE5ODguOVQyUkJXZmp6Tk9mSWxBU1BIRjIiLCJzZXNzaW9uSUQiOiJlMGI2MzU4Ny03ZWQ1LTQ4NzQtODFmNy04NWFmMDAyMGJkZmIiLCJhY2NvdW50X3N0YXR1cyI6IjEiLCJvdHAiOiIiLCJvdHBUeXBlIjoiIiwib3RwU291cmNlIjoiVENJTlZFU1QiLCJvdHBTZXNzaW9uSWQiOiIiLCJhY2NvdW50VHlwZSI6IlBSSU1BUlkiLCJwcmltYXJ5U3ViIjoiIiwicHJpbWFyeUN1c3RvZHlJRCI6IiIsImVub3RwX3NpZ24iOiIiLCJzcWFfc2lnbiI6IiIsImVuX290cCI6IiIsImVuT1RQVHlwZSI6IiIsImNhU3RhdHVzIjoiSUdOT1JFIiwiY3VzVHlwZSI6IklORElWSURVQUwiLCJ0ZW5hbnQiOiJ0Y2JzIn0.SJdq8L6uJeunnpFFy3EEtvpJQFfvMj1gGjTLrVhy8zJ7_x5sdLGvFoybpKKjrYP4jkWIrsaQiNNyIoKnAFNOo_dw2HmYFBUEqk-4PRnV-N0tLcuwftlzKcPwf_DvMfaEgHoOY9xDbVKMcb34evt-vnd0KPrlxk38Q_8J3IOBHNPIJFMwWRAxi-LonT4QE_hCquZji-8-ChcC3mE2gmjXsFxtSrJ0WL8S_1bkUr4KXmzqrCGAuDNR3NAD2NoDMqwUwP6sV-maPy8qnNX2w-27xkNwVaBwZjDrWlrqdZiQobVDH3aBgh8_Xn1WGTXpbvPFLFkdaPiZdO0cBzppoj51Ng", 
+        "Authorization":auth_tcbs, 
         "Content-Type":"application/json",
         "Referer":"https://tcinvest.tcbs.com.vn/",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0"
